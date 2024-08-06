@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "expo": "~51.0.24",
+    "expo-crypto": "~13.0.2",
+    "expo-standard-web-crypto": "^1.8.1",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.3"
