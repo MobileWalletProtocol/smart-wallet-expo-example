@@ -1,13 +1,14 @@
 // 1. Polyfill
 import "./src/polyfill";
 
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import * as Linking from "expo-linking";
+import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { handleResponse } from "@mobile-wallet-protocol/client/dist/core/communicator/handleResponse.native";
 
-// exp://x.x.x.x:8000/--/
-const PREFIX_URL = Linking.createURL("/");
+import Home from "./src/home";
 
 export default function App() {
   // 2. Setup deeplinking
@@ -15,7 +16,7 @@ export default function App() {
     const subscription = Linking.addEventListener("url", ({ url }) => {
       console.log("incoming deeplink:", url);
       try {
-        // handleResponse(url);
+        handleResponse(url);
       } catch (err) {
         console.error(err);
       }
@@ -25,18 +26,9 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <Home />
+      <StatusBar style="dark" />
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
