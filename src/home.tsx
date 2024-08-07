@@ -3,30 +3,23 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import CoinbaseWalletSDK from "@mobile-wallet-protocol/client";
-
 import Section from "./components/section";
 
 // exp://x.x.x.x:8000/--/
 const PREFIX_URL = Linking.createURL("/");
 
-// 3. Initialize SDK
+// Step 1. Initialize SDK and create provider
 const sdk = new CoinbaseWalletSDK({
-  appDeeplinkUrl: PREFIX_URL,
   appName: "SCW Expo Example",
   appChainIds: [8453],
+  appDeeplinkUrl: PREFIX_URL,
 });
-
-// 4. Create EIP-1193 provider
 const provider = sdk.makeWeb3Provider();
 
 export default function Home() {
   const insets = useSafeAreaInsets();
   const [addresses, setAddresses] = useState<string[]>([]);
-
   const isConnected = addresses.length > 0;
-
-  // 5. Use provider
-
   useEffect(() => {
     provider.addListener("accountsChanged", (accounts) => {
       if (accounts && Array.isArray(accounts)) setAddresses(accounts);
@@ -42,6 +35,7 @@ export default function Home() {
     };
   }, []);
 
+  // Step 2: start requesting using provider
   const handleConnect = useCallback(async () => {
     const result = await provider.request({ method: "eth_requestAccounts" });
     if (result && Array.isArray(result)) {
@@ -82,6 +76,11 @@ export default function Home() {
     }),
     [insets]
   );
+  const [connectPatch, setConnectPatch] = useState<number>(0);
+  const handleDisconnectPatched = useCallback(async () => {
+    await handleDisconnect();
+    setConnectPatch((prev) => prev + 1);
+  }, []);
 
   return (
     <ScrollView
@@ -97,7 +96,7 @@ export default function Home() {
         </Text>
       )}
       <Section
-        key="connect"
+        key={`connect${connectPatch}`}
         title="eth_requestAccounts"
         buttonLabel="Connect"
         onPress={handleConnect}
@@ -108,7 +107,7 @@ export default function Home() {
             key="disconnect"
             title="@disconnect"
             buttonLabel="Disconnect"
-            onPress={handleDisconnect}
+            onPress={handleDisconnectPatched}
           />
           <Section
             key="accounts"
