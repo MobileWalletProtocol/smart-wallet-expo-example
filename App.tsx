@@ -5,7 +5,7 @@ import * as Linking from "expo-linking";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { handleResponse } from "@mobile-wallet-protocol/client/dist/core/communicator/handleResponse.native";
+import { handleResponse } from "@mobile-wallet-protocol/client";
 
 import Home from "./src/home";
 
