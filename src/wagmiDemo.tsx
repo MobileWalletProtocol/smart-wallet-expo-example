@@ -18,6 +18,7 @@ import {
   useDisconnect,
 } from "wagmi";
 import { base } from "wagmi/chains";
+import { useCapabilities } from "wagmi/experimental";
 
 const PREFIX_URL = Linking.createURL("/");
 
@@ -45,7 +46,14 @@ export default function WagmiDemo() {
 
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
-  const { data, error, signMessage, reset } = useSignMessage();
+  const {
+    data: signMessageHash,
+    error: signMessageError,
+    signMessage,
+    reset,
+  } = useSignMessage();
+
+  const { data: capabilities, error: capabilitiesError } = useCapabilities();
 
   const contentContainerStyle = useMemo(
     () => ({
@@ -85,15 +93,20 @@ export default function WagmiDemo() {
             title="useDisconnect"
             buttonLabel="Disconnect"
             onPress={() => {
-              disconnect({ connector: connectors[0] })
-              reset()
+              disconnect({ connector: connectors[0] });
+              reset();
             }}
           />
           <Section
             key="useSignMessage"
             title="useSignMessage"
-            result={data ?? error}
+            result={signMessageHash ?? signMessageError}
             onPress={() => signMessage({ message: "hello world" })}
+          />
+          <Section
+            key="useCapabilities"
+            title="useCapabilities"
+            result={JSON.stringify(capabilities ?? capabilitiesError, null, 2)}
           />
         </>
       )}

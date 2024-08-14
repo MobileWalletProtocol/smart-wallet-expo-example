@@ -5,7 +5,7 @@ import Button from "./button";
 type SectionProps = {
   title: string;
   result?: string | Error | null;
-  onPress: () => Promise<string | void> | string | void;
+  onPress?: () => Promise<string | void> | string | void;
   buttonLabel?: string;
 };
 
@@ -39,13 +39,15 @@ function Section(props: SectionProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontSize: 18, fontWeight: 500 }}>{props.title}</Text>
-        <Button
-          title={props.buttonLabel || "Submit"}
-          onPress={() => {
-            props.onPress();
-          }}
-        />
+        <Text style={{ fontSize: 18, fontWeight: 500}}>{props.title}</Text>
+        {props.onPress && (
+          <Button
+            title={props.buttonLabel || "Submit"}
+            onPress={() => {
+              props.onPress?.();
+            }}
+          />
+        )}
       </View>
       {props.result && renderResult()}
     </View>
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    height: 40,
   },
   resultContainer: {
     backgroundColor: "#00000008",
