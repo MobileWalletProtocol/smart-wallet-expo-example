@@ -9,7 +9,14 @@ import {
   Wallets,
 } from "@mobile-wallet-protocol/wagmi-connectors";
 import * as Linking from "expo-linking";
-import { http, createConfig, useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
+import {
+  http,
+  createConfig,
+  useAccount,
+  useConnect,
+  useSignMessage,
+  useDisconnect,
+} from "wagmi";
 import { base } from "wagmi/chains";
 
 const PREFIX_URL = Linking.createURL("/");
@@ -35,10 +42,10 @@ export const config = createConfig({
 export default function WagmiDemo() {
   const insets = useSafeAreaInsets();
   const { address } = useAccount();
-  
+
   const { connect, connectors } = useConnect();
-  const { disconnect } = useDisconnect()
-  const { data, error, signMessage } = useSignMessage()
+  const { disconnect } = useDisconnect();
+  const { data, error, signMessage, reset } = useSignMessage();
 
   const contentContainerStyle = useMemo(
     () => ({
@@ -57,7 +64,7 @@ export default function WagmiDemo() {
       contentContainerStyle={contentContainerStyle}
     >
       <Text style={{ fontSize: 24, fontWeight: "600", textAlign: "center" }}>
-        {"Smart Wallet wagmi Demo"}
+        {"Smart Wallet Wagmi Demo"}
       </Text>
       {address && (
         <Text style={{ fontSize: 16, fontWeight: "600", textAlign: "center" }}>
@@ -74,28 +81,24 @@ export default function WagmiDemo() {
       {address && (
         <>
           <Section
-            key="disconnect"
-            title="@disconnect"
+            key="useDisconnect"
+            title="useDisconnect"
             buttonLabel="Disconnect"
-            onPress={() => disconnect({ connector: connectors[0] })}
+            onPress={() => {
+              disconnect({ connector: connectors[0] })
+              reset()
+            }}
           />
           <Section
-            key="personal_sign"
-            title="personal_sign"
+            key="useSignMessage"
+            title="useSignMessage"
             result={data ?? error}
-            onPress={() => signMessage({ message: 'hello world' })}
+            onPress={() => signMessage({ message: "hello world" })}
           />
         </>
       )}
     </ScrollView>
   );
-}
-
-function stringify(result: unknown): string {
-  if (typeof result === "string") {
-    return result;
-  }
-  return JSON.stringify(result, null, 2);
 }
 
 const styles = StyleSheet.create({
