@@ -10,7 +10,6 @@ type SectionProps = {
 };
 
 function Section(props: SectionProps) {
-
   const renderResult = useCallback(() => {
     const isError = props.result instanceof Error;
     return (
@@ -41,8 +40,12 @@ function Section(props: SectionProps) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={{ fontSize: 18, fontWeight: 500 }}>{props.title}</Text>
-        <Button title={props.buttonLabel || "Submit"} onPress={() => {
-          props.onPress()}} />
+        <Button
+          title={props.buttonLabel || "Submit"}
+          onPress={() => {
+            props.onPress();
+          }}
+        />
       </View>
       {props.result && renderResult()}
     </View>

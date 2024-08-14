@@ -7,7 +7,13 @@ import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { handleResponse } from "@mobile-wallet-protocol/client";
 
-import Home from "./src/home";
+import EIP1193Demo from "./src/eip1193Demo";
+import WagmiDemo, { config } from "./src/wagmiDemo";
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { WagmiProvider } from "wagmi";
+
+const queryClient = new QueryClient()
 
 export default function App() {
   // Pre-requisite 2. Setup deeplinking handling
@@ -26,8 +32,13 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <Home />
-      <StatusBar style="dark" />
+      {/* <EIP1193Demo /> */}
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <WagmiDemo />
+        </QueryClientProvider>
+      </WagmiProvider>
+      <StatusBar style='dark' />
     </SafeAreaProvider>
   );
 }
