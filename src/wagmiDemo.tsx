@@ -30,9 +30,7 @@ export const config = createConfig({
         appName: "Wagmi Demo",
         appDeeplinkUrl: PREFIX_URL,
       },
-      wallet: {
-        ...Wallets.CoinbaseSmartWallet,
-      },
+      wallet: Wallets.CoinbaseSmartWallet,
     }),
   ],
   transports: {
