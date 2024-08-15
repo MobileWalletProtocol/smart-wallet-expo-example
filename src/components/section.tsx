@@ -4,24 +4,14 @@ import Button from "./button";
 
 type SectionProps = {
   title: string;
-  onPress: () => Promise<string | void> | string | void;
+  result?: string | Error | null;
+  onPress?: () => Promise<string | void> | string | void;
   buttonLabel?: string;
 };
 
 function Section(props: SectionProps) {
-  const [result, setResult] = useState<string | Error | null>(null);
-
-  const handlePress = useCallback(async () => {
-    try {
-      const res = await props.onPress();
-      if (res) setResult(res);
-    } catch (err) {
-      if (err instanceof Error) setResult(err);
-    }
-  }, [props.onPress]);
-
   const renderResult = useCallback(() => {
-    const isError = result instanceof Error;
+    const isError = props.result instanceof Error;
     return (
       <View
         style={[
@@ -40,19 +30,26 @@ function Section(props: SectionProps) {
             color: isError ? "#ff0000" : "#000000",
           }}
         >
-          {result instanceof Error ? result.message : result}
+          {props.result instanceof Error ? props.result.message : props.result}
         </Text>
       </View>
     );
-  }, [result]);
+  }, [props.result]);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontSize: 18, fontWeight: 500 }}>{props.title}</Text>
-        <Button title={props.buttonLabel || "Submit"} onPress={handlePress} />
+        <Text style={{ fontSize: 18, fontWeight: 500}}>{props.title}</Text>
+        {props.onPress && (
+          <Button
+            title={props.buttonLabel || "Submit"}
+            onPress={() => {
+              props.onPress?.();
+            }}
+          />
+        )}
       </View>
-      {result && renderResult()}
+      {props.result && renderResult()}
     </View>
   );
 }
@@ -70,6 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    height: 40,
   },
   resultContainer: {
     backgroundColor: "#00000008",
