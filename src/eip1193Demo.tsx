@@ -10,13 +10,19 @@ import Section from "./components/section";
 // for the purpose of this demo. In production, you should use universal links.
 const PREFIX_URL = Linking.createURL("/");
 
+console.log("PREFIX_URL", PREFIX_URL);
+
 // Step 1. Initialize SDK and create provider
 const provider = new EIP1193Provider({
   metadata: {
     appName: "Smart Wallet Expo",
-    appDeeplinkUrl: PREFIX_URL,
+    appDeeplinkUrl: "https://regal-cranachan-6ff60e.netlify.app",
+    appCustomScheme: PREFIX_URL,
   },
-  wallet: Wallets.CoinbaseSmartWallet,
+  wallet: {
+    ...Wallets.CoinbaseSmartWallet,
+    scheme: "http://localhost:3005/connect"
+  }
 });
 
 export default function EIP1193Demo() {

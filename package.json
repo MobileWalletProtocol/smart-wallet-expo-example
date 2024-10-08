@@ -4,12 +4,12 @@
   "main": "expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
-    "@mobile-wallet-protocol/client": "0.0.2",
+    "@mobile-wallet-protocol/client": "file:../react-native-client/packages/client",
     "@mobile-wallet-protocol/wagmi-connectors": "1.0.0",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/bottom-tabs": "^6.6.1",
