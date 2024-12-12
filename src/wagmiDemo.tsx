@@ -27,8 +27,8 @@ export const config = createConfig({
   connectors: [
     createConnectorFromWallet({
       metadata: {
-        appName: "Wagmi Demo",
-        appDeeplinkUrl: PREFIX_URL,
+        name: "Wagmi Demo",
+        customScheme: PREFIX_URL,
       },
       wallet: Wallets.CoinbaseSmartWallet,
     }),
