@@ -1,11 +1,10 @@
 // Pre-requisite 1. Polyfill
 import "./src/polyfill";
 
-import * as Linking from "expo-linking";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { handleResponse } from "@mobile-wallet-protocol/client";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome6 } from "@expo/vector-icons";
@@ -21,20 +20,6 @@ const queryClient = new QueryClient();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  // Pre-requisite 2. Setup deeplinking handling
-  useEffect(() => {
-    const subscription = Linking.addEventListener("url", ({ url }) => {
-      console.log("incoming deeplink:", url);
-      try {
-        handleResponse(url);
-      } catch (err) {
-        console.error(err);
-      }
-    });
-
-    return () => subscription.remove();
-  }, []);
-
   return (
     <SafeAreaProvider>
       <WagmiProvider config={config}>

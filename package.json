@@ -9,8 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@mobile-wallet-protocol/client": "0.0.2",
-    "@mobile-wallet-protocol/wagmi-connectors": "1.0.0",
+    "@mobile-wallet-protocol/client": "1.0.0",
+    "@mobile-wallet-protocol/wagmi-connectors": "1.0.1",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",

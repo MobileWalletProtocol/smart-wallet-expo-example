@@ -1448,20 +1448,21 @@
     semver "^7.5.4"
     uuid "^9.0.1"
 
-"@mobile-wallet-protocol/client@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@mobile-wallet-protocol/client/-/client-0.0.2.tgz#3ebd9d6b886c5fc28e5eb6c7d590b767e5af5c9c"
-  integrity sha512-tVCbVCxBosZjZ6jMfCBsEPXBwABt3WQVk19JNNqGNAF6ZAcdsjZ7QsGpVeplTwmBemlP29RbigCJS02LOZV0BQ==
+"@mobile-wallet-protocol/client@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@mobile-wallet-protocol/client/-/client-1.0.0.tgz#be160c196fd0bd0fd1f07f715ded40eeb58abf05"
+  integrity sha512-gzY/vwf98l4WJW+JheH/DqL5qG/0Y/0rHjOHFo07dDVejg+qyLh9JKZPUQUV1bpwVMjT11G7UdZkTzLh9vpbVQ==
   dependencies:
     "@noble/ciphers" "^0.5.3"
     "@noble/curves" "^1.4.2"
     "@noble/hashes" "^1.4.0"
     eventemitter3 "^5.0.1"
+    fflate "^0.8.2"
 
-"@mobile-wallet-protocol/wagmi-connectors@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@mobile-wallet-protocol/wagmi-connectors/-/wagmi-connectors-1.0.0.tgz#ea0c5e1473012a4d86e8467cb7d70a6da502ecad"
-  integrity sha512-RoZ7IXJJCTZcEsw3hv+VLGWuOTusa9aZ+1nK18J2sMyXoc58ZMhCtwyZ29r8JgZwe6rJxV9VeMglv7AFTb5VNQ==
+"@mobile-wallet-protocol/wagmi-connectors@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@mobile-wallet-protocol/wagmi-connectors/-/wagmi-connectors-1.0.1.tgz#e614266b14f484bf84e6a17aef53e93f6f5feb61"
+  integrity sha512-9xWsU7yf6MAgCbqi5/hj9o/NpjqEnFaRbuq1vV95fjEF65QI8uD01BWBBVbw/7bW+tvJKvYb0M1EjdyrcmMz6Q==
 
 "@motionone/animation@^10.15.1", "@motionone/animation@^10.18.0":
   version "10.18.0"
@@ -4447,6 +4448,11 @@ fetch-retry@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/fetch-retry/-/fetch-retry-4.1.1.tgz#fafe0bb22b54f4d0a9c788dff6dd7f8673ca63f3"
   integrity sha512-e6eB7zN6UBSwGVwrbWVH+gdLnkW9WwHhmq2YDK1Sh30pzx1onRVGBvogTlUeWxwTa+L86NYdo4hFkh7O8ZjSnA==
+
+fflate@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.8.2.tgz#fc8631f5347812ad6028bbe4a2308b2792aa1dea"
+  integrity sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==
 
 fill-range@^7.1.1:
   version "7.1.1"

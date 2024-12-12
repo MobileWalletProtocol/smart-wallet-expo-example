@@ -13,8 +13,8 @@ const PREFIX_URL = Linking.createURL("/");
 // Step 1. Initialize SDK and create provider
 const provider = new EIP1193Provider({
   metadata: {
-    appName: "Smart Wallet Expo",
-    appDeeplinkUrl: PREFIX_URL,
+    name: "Smart Wallet Expo",
+    customScheme: PREFIX_URL,
   },
   wallet: Wallets.CoinbaseSmartWallet,
 });
