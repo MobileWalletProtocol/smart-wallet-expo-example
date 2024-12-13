@@ -12,7 +12,7 @@ This repository contains an example project showcasing the usage of a smart wall
 1. Clone the repository: `git clone https://github.com/MobileWalletProtocol/smart-wallet-expo-example.git`
 2. Navigate to the project directory: `cd smart-wallet-expo-example`
 3. Install dependencies: `npm install`
-4. Start the Expo development server: `npm ios`
+4. Start the Expo development server: `npm run ios`
 
 ## Usage
 
